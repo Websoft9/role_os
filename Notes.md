@@ -15,6 +15,13 @@ Linux 可视化可以从 Desktop 和 Web GUI 两个方案考量。不同的操�
 Cockpit 是红帽开发的网页版图像化服务管理工具，优点是无需中间层，且可以管理多种服务。
 
 
+## 上传OS
+
+目前有如下 Linux 发行版有分发的价值：
+
+* Oracle Linux
+* 深度
+
 ## 待研究
 
 1. 安装tigerVNC 之后，默认生成了 vncserver@.server模板，本Ansible role 中的service模板是修改后的内容
