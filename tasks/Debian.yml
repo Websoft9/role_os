@@ -1,26 +1,2 @@
-- name: Install GNOME Desktop
-  shell: |
-    apt install -y gnome-shell ubuntu-gnome-desktop
-    apt install -y unity-tweak-tool gnome-tweak-tool
-    pkg-reconfigure lightdm
-  when: os_gui=="gnome"
 
-- name: Install KDE Desktop
-  shell: |
-    apt install tasksel
-    tasksel install kubuntu-desktop
-    apt install sddm
-  when: os_gui=="kde"
-  
-- name: Install Xfce Desktop
-  shell: |
-    apt install -y xfce4 xfce4-goodies
-  when: os_gui=="xfce"
-
-- name: Config Desktop
-  shell: |
-    systemctl set-default graphical.target
-    systemctl isolate graphical.target
-    systemctl get-default
-  when: os_gui is defined and os_gui is not none
 

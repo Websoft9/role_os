@@ -1,10 +1,6 @@
-# Install default GUI, gnome,kde
-os_gui:
+# Install Desktop, e.g [gnome,kde]
+# Debian support: gnome, kde, xfce
+# RedHat support: gnome, kde
 
-# Install web gui
-os_webgui: cockpit
-
-# vnc or remote
-os_connection: vnc
-os_cockpit_port: "9099"
+os_desktop:
 

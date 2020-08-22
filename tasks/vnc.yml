@@ -1,4 +1,4 @@
-# setting password for vncserver
+#1 Install VNC
 - block:
   - name: Install VNC Server on {{ansible_os_family}}
     yum:
@@ -23,16 +23,8 @@
         "Password": "{{temp_password}}"
         "Verify": "{{temp_password}}"
         "view-only": "n"
-
-- name: Create password directory
-  file:
-    path: /credentials
-    state: directory
   
-- name: 
-  shell: sudo sh -c 'echo {{ temp_password }} 1> /credentials/password.txt'
-  
-# vncserver configure
+#2 Configure VNC
 - name: Copy vncserver.service(when system_user=root) 
   template: 
     src: vncserver.service1.j2
@@ -51,13 +43,34 @@
     state: restarted
     enabled: yes
 
-# set soft link, -f enforce the exist links
-# ln -sf src des
+#3 Install and configure XRDP
+- block:
+  - name: Install Remote tool on {{ansible_os_family}}
+    shell: yum install xrdp -y
+    when: ansible_os_family == "RedHat"
+
+  - name: Install Remote toolon {{ansible_os_family}}
+    shell: apt install xrdp -y
+    when: ansible_os_family == "Debian"
+
+  - name: Start and enable xrdp
+    service:
+      name: xrdp
+      state: restarted
+      enabled: yes
+
+#4 Check
+
 - name: set soft link
   shell: ln -sf /lib/systemd/system/vncserver.service /lib/systemd/system/vnc.service
-    
-# check service state
-- name: Check vncserver Service
-  shell: systemctl status vncserver | grep Active*
-  register: check_vncserver_service
-  notify: check_vncserver_service
+
+- block:
+  - name: Check vncserver Service
+    shell: systemctl status vncserver | grep Active*
+    register: check_vncserver_service
+    notify: check_vncserver_service
+
+  - name: Check xrdp Service
+    shell: systemctl status xrdp | grep Active*
+    register: check_xrdp_service
+    notify: check_xrdp_service
