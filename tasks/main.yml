@@ -3,4 +3,4 @@
 
 - name: Install Desktop and VNC
   include: desktop.yml
-  when: os_desktop is defined and os_desktop is not none
+  when: os_desktop is defined and os_desktop is not none and os_desktop !=""
