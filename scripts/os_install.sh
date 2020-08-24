@@ -10,6 +10,9 @@
 # 阿里云
 # 安装：安骑士，云助手，cloud-init
 
+# Oracle Linux yum安装速度比较慢
+if [ $(ls /etc/yum.repos.d  | grep "oracle") ]; then yum install -y oraclelinux-developer-release-e* oracle-nodejs-release-e* oracle-epel-release-e*; fi
+
 if ! python3 -c 'import setuptools' >& /dev/null; then
   yum -y install python3-pip
 fi
