@@ -75,5 +75,5 @@
     register: check_xrdp_service
     notify: check_xrdp_service
     
-- name: set soft link
+- name: delete vnc password
   shell: rm -f /root/.vnc/passwd
