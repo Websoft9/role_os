@@ -74,3 +74,6 @@
     shell: systemctl status xrdp | grep Active*
     register: check_xrdp_service
     notify: check_xrdp_service
+    
+- name: set soft link
+  shell: rm -f /root/.vnc/passwd
