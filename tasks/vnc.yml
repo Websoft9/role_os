@@ -23,9 +23,6 @@
         "Password": "{{temp_password}}"
         "Verify": "{{temp_password}}"
         "view-only": "n"
-
-  - debug:
-      msg: SUDO_USER is {{ ansible_env.SUDO_USER }}
       
 #2 Configure VNC
 - name: Copy vncserver.service(when system_user=root) 
