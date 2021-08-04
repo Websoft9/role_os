@@ -29,13 +29,13 @@
   template: 
     src: vncserver.service1.j2
     dest: /lib/systemd/system/vncserver.service
-  when: ansible_user == "root"
+  when: ansible_env.SUDO_USER == "" or  ansible_env.SUDO_USER is none
 
 - name: Copy vncserver.service(when system_user=other) 
   template: 
     src: vncserver.service2.j2
     dest: /lib/systemd/system/vncserver.service
-  when: ansible_user != "root"   
+  when: ansible_env.SUDO_USER != ""  and  ansible_env.SUDO_USER is defined and ansible_env.SUDO_USER is not none
 
 - name: Restart vncserver
   service:
