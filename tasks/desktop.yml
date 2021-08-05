@@ -32,9 +32,7 @@
 - block:
   - name: Install GNOME Desktop
     shell: |
-      apt install -y gnome-shell ubuntu-gnome-desktop
-      apt install -y unity-tweak-tool gnome-tweak-tool
-      pkg-reconfigure lightdm
+      apt-get install gnome-session-flashback
     when: os_desktop=="gnome"
 
   - name: Install KDE Desktop
