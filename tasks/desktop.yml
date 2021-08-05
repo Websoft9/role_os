@@ -9,8 +9,16 @@
       yum groupinstall -y "KDE"
     when: os_desktop=="kde"
 
-  when: ansible_os_family == "RedHat"
+  when: ansible_os_family == "RedHat" and ansible_distribution != 'Amazon'
 
+- block:
+  - name: Install GNOME Desktop
+    shell: |
+      sudo amazon-linux-extras install -y mate-desktop1.x
+      sudo bash -c 'echo PREFERRED=/usr/bin/mate-session > /etc/sysconfig/desktop'
+    when: os_desktop=="gnome"
+
+  when: ansible_os_family == "RedHat" and ansible_distribution == 'Amazon'
 
 - block:
   - name: Install GNOME Desktop
