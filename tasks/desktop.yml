@@ -32,7 +32,7 @@
 - block:
   - name: Install GNOME Desktop
     shell: |
-      apt install gnome-session gnome-shell-extensions -y
+      apt install gnome-session gnome-terminal -y
     when: os_desktop=="gnome"
 
   - name: Install KDE Desktop
