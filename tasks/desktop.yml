@@ -21,7 +21,8 @@
       yum groupinstall -y "X Window System"
       yum groupinstall -y "KDE"
     when: os_desktop=="kde"
-  - name: Install GNOME Desktop
+    
+  - name: Install Mate Desktop on AmazonLinux
     shell: |
       sudo amazon-linux-extras install -y mate-desktop1.x
       sudo bash -c 'echo PREFERRED=/usr/bin/mate-session > /etc/sysconfig/desktop'
