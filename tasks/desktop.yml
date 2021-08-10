@@ -1,34 +1,21 @@
 - block:
   - name: Install GNOME Desktop
     shell: yum groupinstall -y 'Server with GUI'
-    when: os_desktop=="gnome"
+    when: os_desktop=="gnome" and ansible_distribution != 'Amazon'
 
   - name: Install KDE Desktop
     shell: |
       yum groupinstall -y "X Window System"
       yum groupinstall -y "KDE"
-    when: os_desktop=="kde"
-
-  when: ansible_os_family == "RedHat" and ansible_distribution != 'Amazon'
-
-- block:
-  - name: Install GNOME Desktop
-    shell: yum groupinstall -y 'Server with GUI'
-    when: os_desktop=="gnome"
-
-  - name: Install KDE Desktop
-    shell: |
-      yum groupinstall -y "X Window System"
-      yum groupinstall -y "KDE"
-    when: os_desktop=="kde"
+    when: os_desktop=="kde" and ansible_distribution != 'Amazon'
     
   - name: Install Mate Desktop on AmazonLinux
     shell: |
       sudo amazon-linux-extras install -y mate-desktop1.x
       sudo bash -c 'echo PREFERRED=/usr/bin/mate-session > /etc/sysconfig/desktop'
-    when: os_desktop=="mate"
+    when: os_desktop=="mate" and ansible_distribution == 'Amazon'
 
-  when: ansible_os_family == "RedHat" and ansible_distribution == 'Amazon'
+  when: ansible_os_family == "RedHat"
 
 - block:
   - name: Install GNOME Desktop
