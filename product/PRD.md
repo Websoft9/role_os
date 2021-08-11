@@ -9,7 +9,14 @@
 * KDE的包名为：kde-plasma-desktop 或 kde-full
 * GNOM的包名为：gnome
 
-> kde-full 为KDE的完整包，包含 kde-plasma-desktop
+> kde-full 为KDE的完整包，包含 kde-plasma-desktop. Redhat 家族基于 yum groupinstall 安装
+
+|       | CentOS | AmazonLinux | Ubuntu |
+| ----- | ------ | ----------- | ------ |
+| GNOME | Y      |             | Y      |
+| KDE   | Y      |             |        |
+| Unity |        |             |        |
+| Xfce  | Y      | Y           |        |
 
 ### 显示管理器
 
