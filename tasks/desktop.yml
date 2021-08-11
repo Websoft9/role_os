@@ -1,16 +1,25 @@
 - block:
   - name: Install GNOME Desktop
-    shell: yum groupinstall -y 'Server with GUI'
+    shell: |
+      yum groupinstall -y 'Server with GUI'
+      systemctl set-default graphical.target
+      systemctl isolate graphical.target
+      systemctl get-default
     when: os_desktop=="gnome" and ansible_distribution != 'Amazon'
 
   - name: Install KDE Desktop
     shell: |
       yum groupinstall -y "X Window System"
       yum groupinstall -y "KDE"
+      systemctl set-default graphical.target
+      systemctl isolate graphical.target
+      systemctl get-default
     when: os_desktop=="kde" and ansible_distribution != 'Amazon'
 
   - name: Install Xfce Desktop
-    shell: yum groupinstall -y 'Xfce'
+    shell: |
+      yum groupinstall -y 'Xfce'
+      sudo bash -c 'echo PREFERRED=/usr/bin/xfce4-session > /etc/sysconfig/desktop'
     when: os_desktop=="xfce"
     
   - name: Install Mate Desktop on AmazonLinux
@@ -40,13 +49,6 @@
     when: os_desktop=="xfce"
 
   when: ansible_os_family == "Debian"
-
-
-- name: Config Desktop
-  shell: |
-    systemctl set-default graphical.target
-    systemctl isolate graphical.target
-    systemctl get-default
 
 - name: Install VNC
   include: vnc.yml
