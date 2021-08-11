@@ -11,6 +11,7 @@
 
   - name: Install Xfce Desktop
     shell: yum groupinstall -y 'Xfce'
+    when: os_desktop=="xfce"
     
   - name: Install Mate Desktop on AmazonLinux
     shell: |
