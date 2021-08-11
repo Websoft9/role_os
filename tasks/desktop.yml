@@ -8,6 +8,9 @@
       yum groupinstall -y "X Window System"
       yum groupinstall -y "KDE"
     when: os_desktop=="kde" and ansible_distribution != 'Amazon'
+
+  - name: Install Xfce Desktop
+    shell: yum groupinstall -y 'Xfce'
     
   - name: Install Mate Desktop on AmazonLinux
     shell: |
