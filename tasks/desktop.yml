@@ -48,6 +48,11 @@
       apt install -y xfce4 xfce4-goodies
     when: os_desktop=="xfce"
 
+  - name: Install Unity Desktop
+    shell: |
+      apt install -y ubuntu-unity-desktop
+    when: os_desktop=="unity"
+    
   when: ansible_os_family == "Debian"
 
 - name: Install VNC
