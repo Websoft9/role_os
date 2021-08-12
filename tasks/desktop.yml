@@ -31,9 +31,7 @@
   - name: Install Mate Desktop on CentOS
     shell: |
       yum groupinstall -y 'MATE Desktop'
-      systemctl set-default graphical.target
-      systemctl isolate graphical.target
-      systemctl get-default
+      sudo bash -c 'echo PREFERRED=/usr/bin/xfce4-session > /etc/sysconfig/desktop'
     when: os_desktop=="mate" and ansible_distribution == 'CentOS'
 
   when: ansible_os_family == "RedHat"
