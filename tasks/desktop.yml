@@ -28,7 +28,7 @@
       sudo bash -c 'echo PREFERRED=/usr/bin/mate-session > /etc/sysconfig/desktop'
     when: os_desktop=="mate" and ansible_distribution == 'Amazon'
 
-  - name: Install Mate Desktop on AmazonLinux
+  - name: Install Mate Desktop on CentOS
     shell: |
       sudo amazon-linux-extras install -y mate-desktop1.x
       sudo bash -c 'echo PREFERRED=/usr/bin/mate-session > /etc/sysconfig/desktop'
