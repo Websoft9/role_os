@@ -56,8 +56,8 @@
 
   - name: Install Unity Desktop
     shell: |
-      apt install -y ubuntu-unity-desktop
-    when: os_desktop=="unity"
+      apt install -y mate-desktop
+    when: os_desktop=="mate"
     
   when: ansible_os_family == "Debian"
 
