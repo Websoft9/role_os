@@ -38,14 +38,12 @@
 
   - name: Install KDE Desktop
     shell: |
-      apt install tasksel
-      tasksel install kubuntu-desktop
-      apt install sddm
+      apt install kde-plasma-desktop -y
     when: os_desktop=="kde"
     
   - name: Install Xfce Desktop
     shell: |
-      apt install -y xfce4 xfce4-goodies
+      apt install -y xfce4
     when: os_desktop=="xfce"
 
   - name: Install Unity Desktop
