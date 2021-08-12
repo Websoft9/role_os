@@ -30,8 +30,10 @@
 
   - name: Install Mate Desktop on CentOS
     shell: |
-      sudo amazon-linux-extras install -y mate-desktop1.x
-      sudo bash -c 'echo PREFERRED=/usr/bin/mate-session > /etc/sysconfig/desktop'
+      yum groupinstall -y 'MATE Desktop'
+      systemctl set-default graphical.target
+      systemctl isolate graphical.target
+      systemctl get-default
     when: os_desktop=="mate" and ansible_distribution == 'CentOS'
 
   when: ansible_os_family == "RedHat"
