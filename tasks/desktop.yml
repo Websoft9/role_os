@@ -46,15 +46,15 @@
 
   - name: Install KDE Desktop
     shell: |
-      apt install kde-plasma-desktop -y
+      sudo DEBIAN_FRONTEND=noninteractive apt install kde-plasma-desktop -y
     when: os_desktop=="kde"
     
   - name: Install Xfce Desktop
     shell: |
-      apt install -y xfce4
+      sudo DEBIAN_FRONTEND=noninteractive apt install -y xfce4
     when: os_desktop=="xfce"
 
-  - name: Install Unity Desktop
+  - name: Install Mate Desktop
     shell: |
       apt install -y mate-desktop
     when: os_desktop=="mate"
