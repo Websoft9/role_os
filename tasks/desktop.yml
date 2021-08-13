@@ -41,13 +41,14 @@
     shell: |
       apt install gnome -y
     when: os_desktop=="gnome"
-
+    
   - name: Install KDE Desktop
     shell: |
-      sudo DEBIAN_FRONTEND=noninteractive apt install kde-plasma-desktop -y
-      sduo apt remove gdm3 -y
-      sudo apt remove lightdm -y
-      sudo dpkg-reconfigure sddm
+      DEBIAN_FRONTEND=noninteractive apt install kde-plasma-desktop -y
+      apt purge gdm3 -y
+      apt purge lightdm -y
+      sleep 10
+      dpkg-reconfigure sddm
     when: os_desktop=="kde"
 
   - name: Install Xfce Desktop
