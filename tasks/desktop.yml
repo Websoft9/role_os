@@ -48,19 +48,22 @@
       apt purge gdm3 -y
       apt purge lightdm -y
       dpkg-reconfigure sddm
+      echo "plasma_session" >~/.xsession
     when: os_desktop=="kde"
 
   - name: Install Xfce Desktop
     shell: |
-      sudo DEBIAN_FRONTEND=noninteractive apt install -y xfce4
-      sduo apt remove gdm3 -y
-      sudo apt remove sddm -y
-      sudo dpkg-reconfigure lightdm
+      DEBIAN_FRONTEND=noninteractive apt install -y xfce4
+      apt purge gdm3 -y
+      apt purge sddm -y
+      dpkg-reconfigure lightdm
+      echo "xfce4_session" >~/.xsession
     when: os_desktop=="xfce"
 
   - name: Install Mate Desktop
     shell: |
       apt install -y mate-desktop
+      echo "mate_session" >~/.xsession
     when: os_desktop=="mate"
     
   when: ansible_os_family == "Debian"
