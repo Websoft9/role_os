@@ -45,11 +45,17 @@
   - name: Install KDE Desktop
     shell: |
       sudo DEBIAN_FRONTEND=noninteractive apt install kde-plasma-desktop -y
+      sduo apt remove gdm3 -y
+      sudo apt remove lightdm -y
+      sudo dpkg-reconfigure sddm
     when: os_desktop=="kde"
-    
+
   - name: Install Xfce Desktop
     shell: |
       sudo DEBIAN_FRONTEND=noninteractive apt install -y xfce4
+      sduo apt remove gdm3 -y
+      sudo apt remove sddm -y
+      sudo dpkg-reconfigure lightdm
     when: os_desktop=="xfce"
 
   - name: Install Mate Desktop
