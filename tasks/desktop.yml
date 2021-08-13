@@ -45,18 +45,14 @@
   - name: Install KDE Desktop
     shell: |
       DEBIAN_FRONTEND=noninteractive apt install kde-full -y
-      apt purge gdm3 -y
-      apt purge lightdm -y
-      dpkg-reconfigure sddm
+      echo "/usr/sbin/sddm" > /etc/X11/default-display-manager
       echo "plasma_session" >~/.xsession
     when: os_desktop=="kde"
 
   - name: Install Xfce Desktop
     shell: |
       DEBIAN_FRONTEND=noninteractive apt install -y xfce4
-      apt purge gdm3 -y
-      apt purge sddm -y
-      dpkg-reconfigure lightdm
+      echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager
       echo "xfce4-session" >~/.xsession
     when: os_desktop=="xfce"
 
