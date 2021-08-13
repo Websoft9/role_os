@@ -57,13 +57,13 @@
       apt purge gdm3 -y
       apt purge sddm -y
       dpkg-reconfigure lightdm
-      echo "xfce4_session" >~/.xsession
+      echo "xfce4-session" >~/.xsession
     when: os_desktop=="xfce"
 
   - name: Install Mate Desktop
     shell: |
       apt install -y mate-desktop
-      echo "mate_session" >~/.xsession
+      echo "mate-session" >~/.xsession
     when: os_desktop=="mate"
     
   when: ansible_os_family == "Debian"
