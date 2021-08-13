@@ -47,7 +47,6 @@
       DEBIAN_FRONTEND=noninteractive apt install kde-plasma-desktop -y
       apt purge gdm3 -y
       apt purge lightdm -y
-      sleep 10
       dpkg-reconfigure sddm
     when: os_desktop=="kde"
 
