@@ -44,7 +44,7 @@
     
   - name: Install KDE Desktop
     shell: |
-      DEBIAN_FRONTEND=noninteractive apt install kde-plasma-desktop -y
+      DEBIAN_FRONTEND=noninteractive apt install kde-full -y
       apt purge gdm3 -y
       apt purge lightdm -y
       dpkg-reconfigure sddm
