@@ -7,7 +7,7 @@
   
   - name: Install VNC Server on {{ansible_os_family}}
     apt:
-      name: tigervnc-standalone-server
+      name: tightvncserver
     when: ansible_os_family == "Debian"
 
   - name: Create a random password for VNC
