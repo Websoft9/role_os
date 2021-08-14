@@ -45,7 +45,7 @@
   - name: Install KDE Desktop
     shell: |
       echo "/usr/sbin/sddm" > /etc/X11/default-display-manager
-      DEBIAN_FRONTEND=noninteractive apt install kde-full -y
+      DEBIAN_FRONTEND=noninteractive apt install kde-plasma-desktop -y
       echo "plasma_session" >~/.xsession
     when: os_desktop=="kde"
 
