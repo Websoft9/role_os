@@ -44,15 +44,15 @@
     
   - name: Install KDE Desktop
     shell: |
-      DEBIAN_FRONTEND=noninteractive apt install kde-full -y
       echo "/usr/sbin/sddm" > /etc/X11/default-display-manager
+      DEBIAN_FRONTEND=noninteractive apt install kde-full -y
       echo "plasma_session" >~/.xsession
     when: os_desktop=="kde"
 
   - name: Install Xfce Desktop
     shell: |
-      DEBIAN_FRONTEND=noninteractive apt install -y xfce4
       echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager
+      DEBIAN_FRONTEND=noninteractive apt install -y xfce4
       echo "xfce4-session" >~/.xsession
     when: os_desktop=="xfce"
 
