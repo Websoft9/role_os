@@ -46,7 +46,7 @@
     shell: |
       echo "/usr/sbin/sddm" > /etc/X11/default-display-manager
       DEBIAN_FRONTEND=noninteractive apt install kde-plasma-desktop -y
-      echo "plasma_session" >~/.xsession
+      echo "plasma-session" >~/.xsession
     when: os_desktop=="kde"
 
   - name: Install Xfce Desktop
