@@ -30,6 +30,11 @@
     src: vncserver.service1.j2
     dest: /lib/systemd/system/vncserver.service
 
+- name: Copy xstartup 
+  template: 
+    src: xstartup
+    dest: /root/.vnc/xstartup
+
 - name: Restart vncserver
   service:
     name: vncserver
