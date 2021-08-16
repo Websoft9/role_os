@@ -29,14 +29,21 @@
   template: 
     src: vncserver.service1.j2
     dest: /lib/systemd/system/vncserver.service
+    
+- block:
+  - name: Get dm name
+    shell: | 
+      cat /root/.xsession
+    register: dm_name
 
-- name: Copy xstartup 
-  template: 
-    src: xstartup
-    dest: /root/.vnc/xstartup
- 
-- name: Copy xstartup 
-  shell: chmod +x /root/.vnc/xstartup
+  - name: Copy xstartup 
+    template: 
+      src: xstartup
+      dest: /root/.vnc/xstartup
+   
+  - name: Copy xstartup 
+    shell: chmod +x /root/.vnc/xstartup
+  when: ansible_os_family == "Debian"
 
 - name: Restart vncserver
   service:
