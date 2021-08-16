@@ -1,20 +1,4 @@
-# Install and configure XRDP
-- block:
-  - name: Install Remote tool on {{ansible_os_family}}
-    shell: yum install xrdp -y
-    when: ansible_os_family == "RedHat"
-
-  - name: Install Remote toolon {{ansible_os_family}}
-    shell: apt install xrdp -y
-    when: ansible_os_family == "Debian"
-
-  - name: Start and enable xrdp
-    service:
-      name: xrdp
-      state: restarted
-      enabled: yes
-      
-# Install VNC
+#1 Install VNC
 - block:
   - name: Install VNC Server on {{ansible_os_family}}
     yum:
@@ -40,7 +24,7 @@
         "Verify": "{{temp_password}}"
         "view-only": "n"
       
-# Configure VNC
+#2 Configure VNC
 - name: Copy vncserver.service(when system_user=root) 
   template: 
     src: vncserver.service1.j2
@@ -50,12 +34,31 @@
   template: 
     src: xstartup
     dest: /root/.vnc/xstartup
+ 
+- name: Copy xstartup 
+  shell: chmod +x /root/.vnc/xstartup
 
 - name: Restart vncserver
   service:
     name: vncserver
     state: restarted
     enabled: yes
+
+#3 Install and configure XRDP
+- block:
+  - name: Install Remote tool on {{ansible_os_family}}
+    shell: yum install xrdp -y
+    when: ansible_os_family == "RedHat"
+
+  - name: Install Remote toolon {{ansible_os_family}}
+    shell: apt install xrdp -y
+    when: ansible_os_family == "Debian"
+
+  - name: Start and enable xrdp
+    service:
+      name: xrdp
+      state: restarted
+      enabled: yes
 
 #4 Check
 
