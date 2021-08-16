@@ -58,7 +58,7 @@
 
   - name: Install Mate Desktop
     shell: |
-      apt install -y mate-desktop
+      apt install -y mate-desktop mate-desktop-environment
       echo "mate-session" >~/.xsession
     when: os_desktop=="mate"
     
