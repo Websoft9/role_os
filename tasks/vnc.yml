@@ -48,7 +48,7 @@
    
   - name: Copy xstartup 
     shell: chmod +x /root/.vnc/xstartup
-  when: ansible_os_family == "Debian" and file_status.stat.exists == "True"
+  when: ansible_os_family == "Debian" and file_status.stat.exists
 
 - name: Restart vncserver
   service:
