@@ -66,3 +66,37 @@
 
 - name: Install VNC
   include: vnc.yml
+
+- block:
+  - name: Check RedHat Mate Desktop Version
+    shell: sudo echo "Mate Desktop version:" `ls /usr/share/doc/ | grep mate-desktop | awk -F '-' '{print $3}'` | sudo tee -a /data/logs/install_version.txt
+    when: ansible_os_family == "RedHat" and os_desktop == "mate"
+
+  - name: Check RedHat Xfce4 Desktop Version
+    shell: sudo echo "Xfce4 Desktop version:" `ls /usr/share/doc | grep '^xfce4-panel' | awk -F '-' '{print $3}'` | sudo tee -a /data/logs/install_version.txt
+    when: ansible_os_family == "RedHat" and os_desktop == "xfce"
+
+  - name: Check RedHat Gnome Desktop Version
+    shell: sudo echo "Gnome Desktop version:" `ls /usr/share/doc | grep '^gnome-desktop' | awk -F '-' '{print $3}'` | sudo tee -a /data/logs/install_version.txt
+    when: ansible_os_family == "RedHat" and os_desktop == "gnome"
+
+  - name: Check RedHat KDE Desktop Version
+    shell: sudo echo "KDE Desktop version:" `ls /usr/share/doc | grep '^kdelibs' | awk -F '-' '{print $2}'` | sudo tee -a /data/logs/install_version.txt
+    when: ansible_os_family == "RedHat" and os_desktop == "kde"
+
+  - name: Check Debian Xfce4 Desktop Version
+    shell: sudo echo "Xfce4 Desktop version:" `dpkg -l | grep 'xfce4' -w | sed -n '1p' | awk -F ' ' '{print $3}'` | sudo tee -a /data/logs/install_version.txt
+    when: ansible_os_family == "Debian" and os_desktop == "xfce"
+
+  - name: Check Debian Mate Desktop Version
+    shell: sudo echo "Mate Desktop version:" `grep -E 'Version' /usr/share/doc/mate-session-manager/dbus/mate-session.html | awk '{print $3}' | awk -F '<' '{print $1}'` | sudo tee -a /data/logs/install_version.txt
+    when: ansible_os_family == "Debian" and os_desktop == "mate"
+
+  - name: Check Debian Gnome Desktop Version
+    shell: sudo echo "Gnome Desktop version:" `gnome-shell --version | awk '{print $3}'` | sudo tee -a /data/logs/install_version.txt
+    when: ansible_os_family == "Debian" and os_desktop == "gnome"
+
+  - name: Check Debian KDE Desktop Version
+    shell: sudo echo "KDE Desktop version:" `grep 'X-KDE-PluginInfo-Version' /usr/share/kservices5/plasma-dataengine-touchpad.desktop | awk -F '=' '{print $2}'` | sudo tee -a /data/logs/install_version.txt
+    when: ansible_os_family == "Debian" and os_desktop == "kde"
+
