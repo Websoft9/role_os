@@ -29,11 +29,6 @@
   template: 
     src: vncserver.service1.j2
     dest: /lib/systemd/system/vncserver.service
-    
-- name: Get file stat
-  stat:
-    path: /root/.xsession
-  register: file_status
 
 - block:
   - name: Copy xstartup 
