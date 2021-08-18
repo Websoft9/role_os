@@ -99,4 +99,3 @@
   - name: Check Debian KDE Desktop Version
     shell: sudo echo "KDE Desktop version:" `grep 'X-KDE-PluginInfo-Version' /usr/share/kservices5/plasma-dataengine-touchpad.desktop | awk -F '=' '{print $2}'` | sudo tee -a /data/logs/install_version.txt
     when: ansible_os_family == "Debian" and os_desktop == "kde"
-
