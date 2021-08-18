@@ -36,19 +36,14 @@
   register: file_status
 
 - block:
-  - name: Get dm name
-    shell: | 
-      cat /root/.xsession
-    register: dm_name
-
   - name: Copy xstartup 
     template: 
-      src: xstartup
+      src: xstartup.j2
       dest: /root/.vnc/xstartup
    
   - name: Copy xstartup 
     shell: chmod +x /root/.vnc/xstartup
-  when: ansible_os_family == "Debian" and file_status.stat.exists
+  when: ansible_os_family == "Debian"
 
 - name: Restart vncserver
   service:

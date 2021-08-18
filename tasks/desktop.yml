@@ -39,7 +39,7 @@
 - block:
   - name: Install GNOME Desktop
     shell: |
-      apt install gnome -y
+      apt install gnome gnome-session-flashback -y
     when: os_desktop=="gnome"
     
   - name: Install KDE Desktop
