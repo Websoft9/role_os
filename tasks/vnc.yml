@@ -78,10 +78,21 @@
   shell: ln -sf /lib/systemd/system/vncserver.service /lib/systemd/system/vnc.service
 
 - block:
+  - name: Check vncserver Version
+    shell: sudo echo "TigerVNC version:" `cd` | sudo tee -a /data/logs/install_version.txt
+    when: ansible_os_family == "RedHat"
+
+  - name: Check vncserver Version
+    shell: sudo echo "TightVNC version:" `vncserver -version | grep "TigerVNC" | sed -n '1p' | awk '{print $3}'` | sudo tee -a /data/logs/install_version.txt
+    when: ansible_os_family == "Debian"
+
   - name: Check vncserver Service
     shell: systemctl status vncserver | grep Active*
     register: check_vncserver_service
     notify: check_vncserver_service
+  
+  - name: Check Xrdp Version
+    shell: sudo echo "xrdp version:" `unbuffer xrdp --version | sed -n '1p' | awk '{print $2}'` | sudo tee -a /data/logs/install_version.txt
 
   - name: Check xrdp Service
     shell: systemctl status xrdp | grep Active*
