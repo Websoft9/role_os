@@ -3,3 +3,9 @@
 # RedHat support: gnome, kde
 
 os_desktop:
+
+os_image:
+
+os_aegis_download_url: "https://aegis.alicdn.com/download/install/2.0/linux/AliAqsInstall_64.sh"
+
+os_cloudinit_download_url: "https://ecs-image-utils.oss-cn-hangzhou.aliyuncs.com/cloudinit/cloud-init-19.1.2.tgz"

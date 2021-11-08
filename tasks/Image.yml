@@ -1,0 +1,37 @@
+- name: Disable selinux and  firewalld
+  shell: |
+    setenforce 0
+    sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux  2>&1
+    systemctl stop firewalld
+    systemctl disable firewalld
+
+- name: Install package of env, .eg.virtio
+  shell: |
+    yum install qemu-kvm  virt-manager libvirt virt-install openssh-askpass -y
+    pip3 install six pyyaml requests jinja2
+
+- name: Install aegis
+  shell: |
+    wget {{ os_aegis_download_url }} && chmod +x AliAqsInstall_64.sh && ./AliAqsInstall_64.sh sJmepE  2>/dev/null
+    test -d /usr/local/aegis && bash /usr/local/aegis/aegis_install.sh 
+
+- name: Install cloudinit
+  shell: |
+    wget {{ os_cloudinit_download_url }}
+    tar -zxvf ./cloud-init-*.tgz
+    cd cloud-init-*
+    pip3 install -r ./requirements.txt
+    cd ./tools
+    bash deploy.sh centos 7
+
+- name: Change PasswordAuthentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "PasswordAuthentication no"
+    line: "PasswordAuthentication yes"
+
+- name: Set login by root
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "#PermitRootLogin yes"
+    line: "PermitRootLogin yes"

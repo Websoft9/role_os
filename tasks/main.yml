@@ -4,3 +4,7 @@
 - name: Install Desktop and VNC
   include: desktop.yml
   when: os_desktop is defined and os_desktop is not none and os_desktop !=""
+
+- name: upload Private image
+  include: image.yml
+  when: os_image is defined and os_image is not none and os_image !=""
