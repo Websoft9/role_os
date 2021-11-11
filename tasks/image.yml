@@ -21,7 +21,7 @@
     cd cloud-init-*
     pip3 install -r ./requirements.txt
     cd ./tools
-    bash deploy.sh centos 7
+    bash deploy.sh centos {{ansible_distribution_major_version}}
 
 - name: Change PasswordAuthentication
   lineinfile:
