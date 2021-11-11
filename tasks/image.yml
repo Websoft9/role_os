@@ -8,7 +8,6 @@
 - name: Install package of env, .eg.virtio
   shell: |
     yum install qemu-kvm  virt-manager libvirt virt-install openssh-askpass -y
-    pip3 install six pyyaml requests jinja2
 
 - name: Install aegis
   shell: |
