@@ -19,6 +19,7 @@
     wget {{ os_cloudinit_download_url }}
     tar -zxvf ./cloud-init-*.tgz
     cd cloud-init-*
+    [[ ! -f /usr/bin/pip3 ]] && ln -sf /usr/bin/pip-3 /usr/bin/pip3
     pip3 install -r ./requirements.txt
     cd ./tools
     bash deploy.sh centos {{ansible_distribution_major_version}}
