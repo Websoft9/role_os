@@ -23,7 +23,7 @@
   shell: |
     yum install https://archives.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-13.noarch.rpm
     yum install cloud-init
-  when: result|failed
+  when: result != '/etc/cloud/cloud.cfg'
   
 - name: Configure nginx php.conf
   template:
