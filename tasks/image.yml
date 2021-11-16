@@ -21,12 +21,9 @@
     cd cloud-init-*
     [[ -f /usr/bin/pip-3 ]] && python3 -m pip install --upgrade pip
     [[ -f /usr/bin/pip-3 ]] && ln -sf /usr/bin/pip-3 /usr/bin/pip3
-    pip3 >>test.txt
     pip3 install -r ./requirements.txt
-    echo "2" >>test.txt
     cd ./tools
-    echo {{ansible_distribution_major_version}} >>test.txt
-    bash deploy.sh centos {{ansible_distribution_major_version}} >>test.txt
+    bash deploy.sh centos {{ansible_distribution_major_version}}
 
 - name: Change PasswordAuthentication
   lineinfile:
