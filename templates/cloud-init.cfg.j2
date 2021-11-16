@@ -1,0 +1,15 @@
+user:
+    name: root
+    lock_passwd: False
+
+#disable_root: true
+disable_root: false
+
+syslog_fix_perms: root:root
+datasource_list: [ AliYun ]
+datasource:
+    AliYun:
+        support_xen: false
+        timeout: 5 # (defaults to 50 seconds)
+        max_wait: 60 # (defaults to 120 seconds)
+#      metadata_urls: [ 'blah.com' ]
