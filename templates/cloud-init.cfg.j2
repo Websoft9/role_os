@@ -11,41 +11,126 @@ datasource:
     dsmode: local
   TencentCloud:
     metadata_urls: ['http://169.254.0.23', 'http://metadata.tencentyun.com']
+{% endif %}
 
+{% if os_image  == 'huaweicloud' %}
+# The top level settings are used as module
+# and system configuration.
+
+# A set of users which may be applied and/or used by various modules
+# when a 'default' entry is found it will reference the 'default_user'
+# from the distro configuration specified below
+users:
+ - name: root
+   lock_passwd: False
+
+# If this is set, 'root' will not be able to ssh in and they
+# will get a message to login instead as the default $user
+disable_root: false
+ssh_pwauth: true
+
+# This will cause the set+update hostname module to not operate (if true)
+preserve_hostname: false
+
+manage_etc_hosts: localhost
+
+network:
+  config: disabled
+
+apt:
+  preserve_sources_list: true
+
+# Example datasource config
+# datasource:
+#    Ec2:
+#      metadata_urls: [ 'blah.com' ]
+#      timeout: 5 # (defaults to 50 seconds)
+#      max_wait: 10 # (defaults to 120 seconds)
+datasource_list: [ OpenStack ]
+datasource:
+  OpenStack:
+    metadata_urls: ['http://169.254.169.254']
+    max_wait: 120
+    timeout: 5
+    apply_network_config: false
+{% endif %}
+
+{% if os_image  == 'aliyun' %}
+# The top level settings are used as module
+# and system configuration.
+
+# A set of users which may be applied and/or used by various modules
+# when a 'default' entry is found it will reference the 'default_user'
+# from the distro configuration specified below
+users:
+   - default
+
+user:
+    name: root
+    lock_passwd: False
+
+# If this is set, 'root' will not be able to ssh in and they
+# will get a message to login instead as the default $user
+disable_root: false
+
+# This will cause the set+update hostname module to not operate (if true)
+preserve_hostname: false
+
+manage_etc_hosts: localhost
+
+datasource_list: [ AliYun ]
+
+# Example datasource config
+datasource:
+    AliYun:
+        support_xen: false
+        timeout: 5
+        max_wait: 300
+#      metadata_urls: [ 'blah.com' ]
+{% endif %}
+# The modules that run in the 'init' stage
 cloud_init_modules:
  - migrator
+ - source-address
+ - pip-source
+ - seed_random
  - bootcmd
  - write-files
- - growpart
- - resizefs
+ - [ growpart, once-per-instance ]
+ - [ resizefs, once-per-instance ]
+ - disk_setup
+ - mounts
  - set_hostname
  - update_hostname
- - ['update_etc_hosts', 'once-per-instance']
+ - update_etc_hosts
+ - ca-certs
  - rsyslog
  - users-groups
  - ssh
 
+# The modules that run in the 'config' stage
 cloud_config_modules:
- - mounts
+ - ssh-import-id
  - locale
  - set-passwords
- - rh_subscription
+ - spacewalk
  - yum-add-repo
- - package-update-upgrade-install
  - ntp
  - timezone
- - resolv_conf
- - puppet
- - chef
- - salt-minion
- - mcollective
  - disable-ec2-metadata
  - runcmd
+# - ntp-conf
+# - chrony-conf
 
-unverified_modules: ['resolv_conf']
-
+# The modules that run in the 'final' stage
 cloud_final_modules:
+ - package-update-upgrade-install
+ - puppet
+ - chef
+ - mcollective
+ - salt-minion
  - rightscale_userdata
+ - scripts-vendor
  - scripts-per-once
  - scripts-per-boot
  - scripts-per-instance
@@ -56,20 +141,13 @@ cloud_final_modules:
  - final-message
  - power-state-change
 
+# System and/or distro specific settings
+# (not accessible to handlers/transforms)
 system_info:
-  default_user:
-    name: root
-    lock_passwd: false
-    gecos: Cloud User
-    groups: [wheel, adm, systemd-journal]
-    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
-    shell: /bin/bash
-  distro: rhel
-  paths:
-    cloud_dir: /var/lib/cloud
-    templates_dir: /etc/cloud/templates
-  ssh_svcname: sshd
-
-# vim:syntax=yaml
-{% endif %}
-
+   # This will affect which distro class gets used
+   distro: centos
+# Other config here will be given to the distro class and/or path classes
+   paths:
+      cloud_dir: /var/lib/cloud/
+      templates_dir: /etc/cloud/templates/
+   ssh_svcname: sshd
