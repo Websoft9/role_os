@@ -14,16 +14,21 @@
     wget {{ os_aegis_download_url }} && chmod +x AliAqsInstall_64.sh && ./AliAqsInstall_64.sh sJmepE  2>/dev/null
     test -d /usr/local/aegis && bash /usr/local/aegis/aegis_install.sh 
 
+- name: Is cloudinit exists
+  shell: ls /etc/cloud/cloud.cfg
+  ignore_errors: True
+  register: result
+  
 - name: Install cloudinit
   shell: |
-    wget {{ os_cloudinit_download_url }}
-    tar -zxvf ./cloud-init-*.tgz
-    cd cloud-init-*
-    [[ -f /usr/bin/pip-3 ]] && python3 -m pip install --upgrade pip
-    [[ -f /usr/bin/pip-3 ]] && ln -sf /usr/bin/pip-3 /usr/bin/pip3
-    pip3 install -r ./requirements.txt
-    cd ./tools
-    bash deploy.sh centos {{ansible_distribution_major_version}}
+    yum install https://archives.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-13.noarch.rpm
+    yum install cloud-init
+  when: result|failed
+  
+- name: Configure nginx php.conf
+  template:
+    src: cloud-init.cfg.j2
+    dest: /etc/cloud/cloud.cfg
 
 - name: Change PasswordAuthentication
   lineinfile:
