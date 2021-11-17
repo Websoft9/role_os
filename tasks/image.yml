@@ -43,3 +43,6 @@
     dest: /etc/ssh/sshd_config
     regexp: "#PermitRootLogin yes"
     line: "PermitRootLogin yes"
+
+- name: Install cloudinit
+  shell: systemctl restart sshd
