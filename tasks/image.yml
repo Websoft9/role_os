@@ -18,12 +18,14 @@
   shell: ls /etc/cloud/cloud.cfg
   ignore_errors: True
   register: result
-  
+
+- debug: var=result.stdout
+
 - name: Install cloudinit
   shell: |
     yum install https://archives.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-13.noarch.rpm
     yum install cloud-init
-  when: result != '/etc/cloud/cloud.cfg'
+  when: result.stdout != '/etc/cloud/cloud.cfg'
   
 - name: Configure nginx php.conf
   template:
