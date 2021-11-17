@@ -44,5 +44,5 @@
     regexp: "#PermitRootLogin yes"
     line: "PermitRootLogin yes"
 
-- name: Install cloudinit
+- name: Restart sshd
   shell: systemctl restart sshd
