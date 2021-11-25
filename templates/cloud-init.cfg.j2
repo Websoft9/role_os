@@ -1,4 +1,4 @@
-{% if os_image  == 'tencentcloud' %}
+{% if os_cloudplatform  == 'tencentcloud' %}
 users:
  - default
 
@@ -13,7 +13,7 @@ datasource:
     metadata_urls: ['http://169.254.0.23', 'http://metadata.tencentyun.com']
 {% endif %}
 
-{% if os_image  == 'huaweicloud' %}
+{% if os_cloudplatform  == 'huaweicloud' %}
 # The top level settings are used as module
 # and system configuration.
 
@@ -55,7 +55,7 @@ datasource:
     apply_network_config: false
 {% endif %}
 
-{% if os_image  == 'alibabacloud' %}
+{% if os_cloudplatform  == 'alibabacloud' %}
 # The top level settings are used as module
 # and system configuration.
 
