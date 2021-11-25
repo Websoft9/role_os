@@ -19,7 +19,7 @@
   shell: |
     yum erase chrony
     yum install chrony -y
-  when: ansible_distribution == 'OracleLinux' and ansible_distribution_major_version == "8"
+  when: ansible_distribution == 'OracleLinux' and ansible_distribution_major_version == "7"
 
 - name: chronyd need to re-install because of service error
   shell: |
@@ -29,7 +29,8 @@
   
 - name: Configure time zone
   shell: |
-    timedatectl set-ntp yes 
+    timedatectl set-ntp yes
+    timedatectl set-timezone "Asia/Shanghai"
     timedatectl set-local-rtc yes
     systemctl restart chronyd
     hwclock --localtime
