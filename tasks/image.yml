@@ -50,3 +50,5 @@
 
 - name: Restart sshd
   shell: systemctl restart sshd
+
+- include: "migration/{{os_cloudplatform}}.yml"
