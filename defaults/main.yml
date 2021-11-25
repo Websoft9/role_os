@@ -4,8 +4,7 @@
 
 os_desktop:
 
+# aliyun | qcloud | huaweicloud
 os_image:
 
 os_aegis_download_url: "https://aegis.alicdn.com/download/install/2.0/linux/AliAqsInstall_64.sh"
-
-os_cloudinit_download_url: "https://ecs-image-tools.oss-cn-hangzhou.aliyuncs.com/cloudinit/cloud-init-19.1.10.tgz"
