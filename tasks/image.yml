@@ -14,14 +14,11 @@
   template:
     src: cloud-init.cfg.j2
     dest: /etc/cloud/cloud.cfg
-
-- name: chrony need to re-install because of service error
-  shell: |
-    yum erase chrony -y
-    yum install chrony -y
   
 - name: Configure time zone
   shell: |
+    yum erase chrony -y
+    yum install chrony -y
     timedatectl set-ntp yes
     timedatectl set-timezone "Asia/Shanghai"
     timedatectl set-local-rtc yes
