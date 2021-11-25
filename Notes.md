@@ -36,3 +36,9 @@ Cockpit 安装已经移到 role_common
 #### 阿里云上 OracleLinux 无法通过控制台下发秘钥对？
 
 确保安骑士服务启动，且安骑士版本是阿里云版本
+
+#### Oracle Linux 如何安装 epel 等软件包？
+
+Oracle Linux 提供了非常快捷等安装方式（[参考](https://yum.oracle.com/getting-started.html#installing-software-from-oracle-linux-yum-server)）  
+例如：yum install oracle-epel-release-el8
+
