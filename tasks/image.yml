@@ -17,13 +17,13 @@
 
 - name: chrony need to re-install because of service error(on OracleLinux8)
   shell: |
-    yum erase chrony
+    yum erase chrony -y
     yum install chrony -y
   when: ansible_distribution == 'OracleLinux' and ansible_distribution_major_version == "8"
 
 - name: chronyd need to re-install because of service error(on OracleLinux7)
   shell: |
-    yum erase chronyd
+    yum erase chronyd -y
     yum install chronyd -y
   when: ansible_distribution == 'OracleLinux' and ansible_distribution_major_version == "7"
   
