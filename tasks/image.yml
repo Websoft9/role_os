@@ -15,17 +15,10 @@
     src: cloud-init.cfg.j2
     dest: /etc/cloud/cloud.cfg
 
-- name: chrony need to re-install because of service error(on OracleLinux8)
+- name: chrony need to re-install because of service error
   shell: |
     yum erase chrony -y
     yum install chrony -y
-  when: ansible_distribution == 'OracleLinux' and ansible_distribution_major_version == "8"
-
-- name: chronyd need to re-install because of service error(on OracleLinux7)
-  shell: |
-    yum erase chronyd -y
-    yum install chronyd -y
-  when: ansible_distribution == 'OracleLinux' and ansible_distribution_major_version == "7"
   
 - name: Configure time zone
   shell: |
