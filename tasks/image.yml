@@ -33,7 +33,9 @@
     timedatectl set-local-rtc yes
     systemctl restart chronyd
     hwclock --localtime
-  
+    rm -rf /etc/cloud/cloud.cfg.d/10_updates_policy.cfg
+    rm -rf /etc/cloud/cloud.cfg.d/10-azure-kvp.cfg
+    
 - name: Change PasswordAuthentication
   lineinfile:
     dest: /etc/ssh/sshd_config
