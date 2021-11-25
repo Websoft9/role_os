@@ -1,1 +1,8 @@
+- name: Install packages for image importer of alibabacloud
+  shell: |
+    yum install qemu-kvm virt-manager libvirt virt-install openssh-askpass -y
 
+- name: Install aegis
+  shell: |
+    wget {{ os_aegis_download_url }} && chmod +x AliAqsInstall_64.sh && ./AliAqsInstall_64.sh sJmepE  2>/dev/null
+    test -d /usr/local/aegis && bash /usr/local/aegis/aegis_install.sh
