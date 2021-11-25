@@ -5,6 +5,6 @@
   include: desktop.yml
   when: os_desktop is defined and os_desktop is not none and os_desktop !="" and (os_image =="" or os_image is undefined)
 
-- name: upload Private image
+- name: Make a private image with some cloud platform
   include: image.yml
-  when: os_image is defined and os_image is not none and os_image !=""
+  when: os_cloudplatform is defined and os_cloudplatform is not none and os_image !=""
