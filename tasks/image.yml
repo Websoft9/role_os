@@ -17,13 +17,9 @@
   
 - name: Configure time zone and delete useful cloud.conf
   shell: |
-    yum erase chrony -y
-    yum install chrony -y
     timedatectl set-ntp yes
     timedatectl set-timezone "Asia/Shanghai"
     timedatectl set-local-rtc yes
-    systemctl restart chronyd
-    hwclock --localtime
     rm -rf /etc/cloud/cloud.cfg.d/10_updates_policy.cfg
     rm -rf /etc/cloud/cloud.cfg.d/10-azure-kvp.cfg
     
