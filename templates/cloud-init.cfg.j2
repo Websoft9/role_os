@@ -87,6 +87,18 @@ datasource:
         timeout: 5
         max_wait: 300
 #      metadata_urls: [ 'blah.com' ]
+
+timezone: "Asia/Shanghai"
+
+growpart:
+  mode: auto
+  devices: [/dev/vda2]
+  ignore_growroot_disabled: false
+
+runcmd:
+  - [pvresize,/dev/vda2]
+  - [lvextend,-l,+100%FREE,/dev/rootvg/rootlv]
+  - [xfs_growfs,/dev/rootvg/rootlv]
   
 {% endif %}
 # The modules that run in the 'init' stage
@@ -141,18 +153,6 @@ cloud_final_modules:
  - phone-home
  - final-message
  - power-state-change
-
-timezone: "Asia/Shanghai"
-
-growpart:
-  mode: auto
-  devices: [/dev/vda2]
-  ignore_growroot_disabled: false
-
-runcmd:
-  - [pvresize,/dev/vda2]
-  - [lvextend,-l,+100%FREE,/dev/rootvg/rootlv]
-  - [xfs_growfs,/dev/rootvg/rootlv]
 
 # System and/or distro specific settings
 # (not accessible to handlers/transforms)
