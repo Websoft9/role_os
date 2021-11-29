@@ -38,4 +38,19 @@
 - name: Restart sshd
   shell: systemctl restart sshd
 
+- name: Uninstall waagent
+  shell: |
+    yum -y remove WALinuxAgent
+    rm -f /etc/waagent.conf.rpmsave
+    rm -rf /var/lib/waagent
+    rm -f /var/log/waagent.log
+  when: ansible_os_family == "RedHat"
+
+- name: Uninstall waagent
+  shell: |
+    apt -y purge walinuxagent
+    rm -rf /var/lib/waagent
+    rm -f /var/log/waagent.log
+  when: ansible_os_family == "Debian"
+  
 - include: "migration/{{os_cloudplatform}}.yml"
