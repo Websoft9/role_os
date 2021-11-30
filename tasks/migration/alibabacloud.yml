@@ -8,11 +8,11 @@
     test -d /usr/local/aegis && bash /usr/local/aegis/aegis_install.sh
 
 - name: Install aliyun_assist
-  shell: yum install https://aliyun-client-assist.oss-accelerate.aliyuncs.com/linux/aliyun_assist_latest.rpm
+  shell: yum -y install https://aliyun-client-assist.oss-accelerate.aliyuncs.com/linux/aliyun_assist_latest.rpm
   when: ansible_os_family == "RedHat"
 
 - name: Install aliyun_assist
-  shell: apt install https://aliyun-client-assist.oss-accelerate.aliyuncs.com/linux/aliyun_assist_latest.deb
+  shell: apt -y install https://aliyun-client-assist.oss-accelerate.aliyuncs.com/linux/aliyun_assist_latest.deb
   when: ansible_os_family == "Debian"
   
 - name: Install aliyun_assist
