@@ -53,4 +53,9 @@
     rm -f /var/log/waagent.log
   when: ansible_os_family == "Debian"
   
+- name: Disable firewalld
+  shell: |
+    systemctl stop firewalld
+    systemctl disable firewalld
+    
 - include: "migration/{{os_cloudplatform}}.yml"
