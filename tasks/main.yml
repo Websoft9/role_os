@@ -13,3 +13,6 @@
 - name: Make a private image with some cloud platform
   include: image.yml
   when: os_cloudplatform is defined and os_cloudplatform is not none and os_cloudplatform  !=""
+
+- name: Check chrony status
+  shell: systemctl restart chronyd
