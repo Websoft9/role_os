@@ -1,7 +1,7 @@
 - name: Install Desktop on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
 
-- name: Disable firewalld
+- name: Disable firewalld(some cloud has no firewalld)
   shell: |
     systemctl stop firewalld
     systemctl disable firewalld
