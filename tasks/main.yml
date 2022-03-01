@@ -5,6 +5,7 @@
   shell: |
     systemctl stop firewalld
     systemctl disable firewalld
+  ignore_errors: true
     
 - name: Install Desktop and VNC
   include: desktop.yml
